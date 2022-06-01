@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace FakeJira.Controllers
 {
+    [Authorize(Roles = "User, Admin")]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -20,6 +21,7 @@ namespace FakeJira.Controllers
             return View();
         }
 
+        
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
