@@ -29,5 +29,7 @@ namespace FakeJira.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<FakeJiraDataLibrary.Models.EmployeeModel> EmployeeModels { get; set; }
     }
 }

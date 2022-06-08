@@ -159,7 +159,7 @@ namespace FakeJira.Controllers
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // Add new user to User role.  Had to enable roleManager in Web.config
-                    //UserManager.AddToRole(user.Id, "User");
+                    UserManager.AddToRole(user.Id, "User");
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
