@@ -30,12 +30,5 @@ namespace FakeJira.Controllers
             return View();
         }
 
-        public ActionResult Testing()
-        {
-            ViewBag.Message = "Testing stuff";
-            List<EmployeeModel> EmployeesList = new List<EmployeeModel>();
-            EmployeesList = SQLDataAccess.LoadData<EmployeeModel>(@"SELECT * FROM [FakeJiraDB].[dbo].[Employee]");
-            return View(EmployeesList);
-        }
     }
 }

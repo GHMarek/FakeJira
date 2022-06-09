@@ -9,7 +9,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FakeJira.Models;
+using FakeJiraDataLibrary.DataAccess;
 using System.Web.Security;
+using FakeJiraDataLibrary.Models;
 
 namespace FakeJira.Controllers
 {
@@ -158,8 +160,17 @@ namespace FakeJira.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
-                    // Add new user to User role.  Had to enable roleManager in Web.config
-                    UserManager.AddToRole(user.Id, "User");
+                    if (SQLDataAccess.LoadData<Role>("select top 1 1 k from dbo.AspNetRoles").Count() > 0)
+                    {
+                        UserManager.AddToRole(user.Id, "User");
+                    }
+                    else
+                    {
+                        // Only if none Role exists.
+                        SQLDataAccess.SaveData("insert into dbo.AspNetRoles (Id, Name) values (1, 'User'), (2, 'Admin')");
+                    }
+
+                    // Add new user to User role.  Had to enable roleManager in Web.config.
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link

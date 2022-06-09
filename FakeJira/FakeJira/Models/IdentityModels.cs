@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using FakeJiraDataLibrary.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -20,6 +21,10 @@ namespace FakeJira.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Employee> Employee { get; set; }
+        public DbSet<FakeJiraDataLibrary.Models.Task> Task { get; set; }
+        public DbSet<Project> Project { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -30,6 +35,6 @@ namespace FakeJira.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<FakeJiraDataLibrary.Models.EmployeeModel> EmployeeModels { get; set; }
+        //public System.Data.Entity.DbSet<FakeJiraDataLibrary.Models.Employee> EmployeeModels { get; set; }
     }
 }
