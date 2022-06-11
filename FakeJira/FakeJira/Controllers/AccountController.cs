@@ -12,6 +12,7 @@ using FakeJira.Models;
 using FakeJiraDataLibrary.DataAccess;
 using System.Web.Security;
 using FakeJiraDataLibrary.Models;
+using System.Collections.Generic;
 
 namespace FakeJira.Controllers
 {
@@ -162,15 +163,28 @@ namespace FakeJira.Controllers
 
                     if (SQLDataAccess.LoadData<Role>("select top 1 1 k from dbo.AspNetRoles").Count() > 0)
                     {
+                        // Add new user to User role.  Had to enable roleManager in Web.config.
                         UserManager.AddToRole(user.Id, "User");
                     }
                     else
                     {
                         // Only if none Role exists.
-                        SQLDataAccess.SaveData("insert into dbo.AspNetRoles (Id, Name) values (1, 'User'), (2, 'Admin')");
-                    }
+                        Role userRole = new Role();
+                        userRole.Name = "User";
+                        userRole.Id = 1;
 
-                    // Add new user to User role.  Had to enable roleManager in Web.config.
+                        Role adminRole = new Role();
+                        userRole.Name = "Admin";
+                        userRole.Id = 2;
+
+                        List<Role> data = new List<Role>() {userRole, adminRole };
+
+                        string sql = "insert into dbo.AspNetRoles (Id, Name) values (@Id, @Name);";
+
+                        SQLDataAccess.SaveData(sql, data);
+
+                        UserManager.AddToRole(user.Id, "User");
+                    }
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
