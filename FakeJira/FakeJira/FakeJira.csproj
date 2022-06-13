@@ -175,9 +175,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202206091618192_FirstMigrationAddEmployeeProjectRoleTask.cs" />
-    <Compile Include="Migrations\202206091618192_FirstMigrationAddEmployeeProjectRoleTask.Designer.cs">
-      <DependentUpon>202206091618192_FirstMigrationAddEmployeeProjectRoleTask.cs</DependentUpon>
+    <Compile Include="Migrations\202206131648211_NewMigration.cs" />
+    <Compile Include="Migrations\202206131648211_NewMigration.Designer.cs">
+      <DependentUpon>202206131648211_NewMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -248,10 +248,10 @@
     <Content Include="Views\Project\Create.cshtml" />
     <Content Include="Views\Shared\_BackToListButtonPartial.cshtml" />
     <Content Include="Views\Shared\_CreateButtonPartial.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -273,8 +273,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202206091618192_FirstMigrationAddEmployeeProjectRoleTask.resx">
-      <DependentUpon>202206091618192_FirstMigrationAddEmployeeProjectRoleTask.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202206131648211_NewMigration.resx">
+      <DependentUpon>202206131648211_NewMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

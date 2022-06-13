@@ -21,7 +21,7 @@ namespace FakeJira.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Employee> Employee { get; set; }
+        public DbSet<User> User { get; set; }
         public DbSet<FakeJiraDataLibrary.Models.Task> Task { get; set; }
         public DbSet<Project> Project { get; set; }
 

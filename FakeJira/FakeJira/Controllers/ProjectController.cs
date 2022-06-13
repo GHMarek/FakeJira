@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace FakeJira.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProjectController : Controller
     {
         private ApplicationDbContext db;

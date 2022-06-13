@@ -21,9 +21,10 @@ namespace FakeJira.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private ApplicationDbContext db;
         public AccountController()
         {
+            db = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -161,7 +162,7 @@ namespace FakeJira.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
-                    if (SQLDataAccess.LoadData<Role>("select top 1 1 k from dbo.AspNetRoles").Count() > 0)
+                    if (SQLDataAccess.LoadData<Role>("select top 1 Id from dbo.AspNetRoles").Count() > 0)
                     {
                         // Add new user to User role.  Had to enable roleManager in Web.config.
                         UserManager.AddToRole(user.Id, "User");
@@ -174,8 +175,8 @@ namespace FakeJira.Controllers
                         userRole.Id = 1;
 
                         Role adminRole = new Role();
-                        userRole.Name = "Admin";
-                        userRole.Id = 2;
+                        adminRole.Name = "Admin";
+                        adminRole.Id = 2;
 
                         List<Role> data = new List<Role>() {userRole, adminRole };
 
@@ -183,8 +184,18 @@ namespace FakeJira.Controllers
 
                         SQLDataAccess.SaveData(sql, data);
 
+
                         UserManager.AddToRole(user.Id, "User");
+
+                        // If this is first user, make him admin.
+                        if (SQLDataAccess.LoadData<Role>("select count(*) from dbo.AspNetUsers").Count() == 1)
+                        {
+                            UserManager.AddToRole(user.Id, "Admin");
+                        }
+
                     }
+
+
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link

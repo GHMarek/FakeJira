@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FakeJiraDataLibrary.Models
 {
-    public class Employee
+    public class User
     {
         [Required]
         public int Id { get; set; }
@@ -19,7 +19,6 @@ namespace FakeJiraDataLibrary.Models
         public string EmailAddress { get; set; }
         public string DepartmentId { get; set; }
         public int BusinessRoleId { get; set; }
-        [Required]
         [DataType(DataType.ImageUrl)]
         public string Picture { get; set; }
 

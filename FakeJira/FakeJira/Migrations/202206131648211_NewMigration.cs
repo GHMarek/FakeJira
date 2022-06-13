@@ -3,12 +3,12 @@ namespace FakeJira.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class FirstMigrationAddEmployeeProjectRoleTask : DbMigration
+    public partial class NewMigration : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.Employees",
+                "dbo.Users",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -17,7 +17,7 @@ namespace FakeJira.Migrations
                         EmailAddress = c.String(nullable: false),
                         DepartmentId = c.String(),
                         BusinessRoleId = c.Int(nullable: false),
-                        Picture = c.String(nullable: false),
+                        Picture = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -134,7 +134,7 @@ namespace FakeJira.Migrations
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Projects");
-            DropTable("dbo.Employees");
+            DropTable("dbo.Users");
         }
     }
 }
