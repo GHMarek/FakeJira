@@ -4,7 +4,25 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Users</h2>
+<h4>Business roles</h4>
+
+<div class="row">
+    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("CreateBusinessRole")">
+        <span class="glyphicon glyphicon-plus"></span>
+        <span>Add new</span>
+    </a>
+</div>
+
+<h4>Departments</h4>
+
+<div class="row">
+    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("CreateDepartment")">
+        <span class="glyphicon glyphicon-plus"></span>
+        <span>Add new</span>
+    </a>
+</div>
+
+<h4>Users</h4>
 
 <table class="table table-condensed table-hover">
     <tr>
@@ -28,15 +46,30 @@
         </th>
     </tr>
 
-    @foreach(var i in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(m => i.EmailAddress)
-                    </td>
-                    <td>
-                        EDIT | DETAILS | DELETE
-                    </td>
-                </tr>
-            }
+    @foreach (var i in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(m => i.Id)
+    </td>
+    <td>
+        @Html.DisplayFor(m => i.EmailAddress)
+    </td>
+    <td>
+        @Html.DisplayFor(m => i.FirstName)
+    </td>
+    <td>
+        @Html.DisplayFor(m => i.LastName)
+    </td>
+    <td>
+        @Html.DisplayFor(m => i.DepartmentId)
+    </td>
+    <td>
+        @Html.DisplayFor(m => i.BusinessRoleId)
+    </td>
+    <td>
+        EDIT | DETAILS | DELETE
+    </td>
+</tr>
+    }
 </table>

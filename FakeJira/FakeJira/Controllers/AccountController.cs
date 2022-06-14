@@ -162,7 +162,7 @@ namespace FakeJira.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
-                    if (SQLDataAccess.LoadData<Role>("select top 1 Id from dbo.AspNetRoles").Count() > 0)
+                    if (SQLDataAccess.LoadData<BusinessRole>("select top 1 Id from dbo.AspNetRoles").Count() > 0)
                     {
                         // Add new user to User role.  Had to enable roleManager in Web.config.
                         UserManager.AddToRole(user.Id, "User");
@@ -170,15 +170,15 @@ namespace FakeJira.Controllers
                     else
                     {
                         // Only if none Role exists.
-                        Role userRole = new Role();
+                        BusinessRole userRole = new BusinessRole();
                         userRole.Name = "User";
                         userRole.Id = 1;
 
-                        Role adminRole = new Role();
+                        BusinessRole adminRole = new BusinessRole();
                         adminRole.Name = "Admin";
                         adminRole.Id = 2;
 
-                        List<Role> data = new List<Role>() {userRole, adminRole };
+                        List<BusinessRole> data = new List<BusinessRole>() {userRole, adminRole };
 
                         string sql = "insert into dbo.AspNetRoles (Id, Name) values (@Id, @Name);";
 
@@ -188,13 +188,18 @@ namespace FakeJira.Controllers
                         UserManager.AddToRole(user.Id, "User");
 
                         // If this is first user, make him admin.
-                        if (SQLDataAccess.LoadData<Role>("select count(*) from dbo.AspNetUsers").Count() == 1)
+                        if (SQLDataAccess.LoadData<BusinessRole>("select count(*) from dbo.AspNetUsers").Count() == 1)
                         {
                             UserManager.AddToRole(user.Id, "Admin");
                         }
 
                     }
 
+                    // Add new business user for admin or manager to process.
+                    User newUser = new User();
+                    newUser.EmailAddress = user.Email;
+                    db.User.Add(newUser);
+                    db.SaveChanges();
 
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
