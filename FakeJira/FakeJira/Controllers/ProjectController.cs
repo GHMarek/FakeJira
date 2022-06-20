@@ -3,6 +3,7 @@ using FakeJiraDataLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -46,6 +47,24 @@ namespace FakeJira.Controllers
 
             return View();
         }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Project project = db.Project.Find(id);
+
+            if  (project == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(project);
+        }
+
 
         protected override void Dispose(bool disposing)
         {

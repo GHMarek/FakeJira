@@ -1,26 +1,31 @@
 ﻿@model IEnumerable<FakeJiraDataLibrary.Models.User>
+@using FakeJira.Models
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h4>Business roles</h4>
-
-<div class="row">
+<div class="btn-toolbar" style="justify-content: center; display: flex;">
     <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("CreateBusinessRole")">
         <span class="glyphicon glyphicon-plus"></span>
-        <span>Add new</span>
+        <span>Add Business Role</span>
     </a>
-</div>
-
-<h4>Departments</h4>
-
-<div class="row">
+    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("LoadBusinessRole")">
+        <span class="glyphicon glyphicon-sunglasses"></span>
+        <span>Display Business Roles</span>
+    </a>
     <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("CreateDepartment")">
         <span class="glyphicon glyphicon-plus"></span>
-        <span>Add new</span>
+        <span>Add Department</span>
+    </a>
+    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("LoadDepartment")">
+        <span class="glyphicon glyphicon-sunglasses"></span>
+        <span>Display Departments</span>
     </a>
 </div>
+
+</br>
+</br>
 
 <h4>Users</h4>
 
@@ -44,32 +49,34 @@
         <th>
             @Html.DisplayNameFor(m => m.BusinessRoleId)
         </th>
+        <th></th>
+        <th></th>
     </tr>
 
     @foreach (var i in Model)
     {
-<tr>
-    <td>
-        @Html.DisplayFor(m => i.Id)
-    </td>
-    <td>
-        @Html.DisplayFor(m => i.EmailAddress)
-    </td>
-    <td>
-        @Html.DisplayFor(m => i.FirstName)
-    </td>
-    <td>
-        @Html.DisplayFor(m => i.LastName)
-    </td>
-    <td>
-        @Html.DisplayFor(m => i.DepartmentId)
-    </td>
-    <td>
-        @Html.DisplayFor(m => i.BusinessRoleId)
-    </td>
-    <td>
-        EDIT | DETAILS | DELETE
-    </td>
-</tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(m => i.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(m => i.EmailAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(m => i.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(m => i.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(m => i.DepartmentId)
+            </td>
+            <td>
+                @Html.DisplayFor(m => i.BusinessRoleId)
+            </td>
+            <td>
+                @Html.Partial("_TableButtonPartial", new MiscButtonPartial { UserId = i.Id })
+            </td>
+        </tr>
     }
 </table>

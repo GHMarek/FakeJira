@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<FakeJiraDataLibrary.Models.Project>
+@using FakeJira.Models
 
 @{
     ViewBag.Title = "Index";
@@ -14,6 +15,7 @@
             @Html.DisplayNameFor(m => m.Name)
         </th>
         <th></th>
+        <th></th>
     </tr>
 
     @foreach(var i in Model)
@@ -23,7 +25,7 @@
                         @Html.DisplayFor(m => i.Name)
                     </td>
                     <td>
-                        EDIT | DETAILS | DELETE
+                        @Html.Partial("_TableButtonPartial", new MiscButtonPartial { ProjectId = i.Id })
                     </td>
                 </tr>
             }

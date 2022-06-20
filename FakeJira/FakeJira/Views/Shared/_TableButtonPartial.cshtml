@@ -1,0 +1,34 @@
+﻿@model FakeJira.Models.MiscButtonPartial
+@using FakeJira.Models
+
+
+<td style="width:400px;">
+    <div class="btn-group" role="group">
+        @Html.Partial("_MiscButtonPartial",
+        new MiscButtonPartial { Action = "Edit", ButtonType = "btn-primary", Glyph = "pencil", Text = "Edit"
+        ,
+            ProjectId = Model.ProjectId,
+            UserId = Model.UserId,
+            DepartmentId = Model.DepartmentId,
+            BusinessRoleId = Model.BusinessRoleId
+        })
+
+        @Html.Partial("_MiscButtonPartial",
+        new MiscButtonPartial { Action = "Details", ButtonType = "btn-success", Glyph = "list", Text = "Details"
+        ,
+            ProjectId = Model.ProjectId,
+            UserId = Model.UserId,
+            DepartmentId = Model.DepartmentId,
+            BusinessRoleId = Model.BusinessRoleId
+        })
+
+        @Html.Partial("_MiscButtonPartial",
+        new MiscButtonPartial { Action = "Delete", ButtonType = "btn-danger", Glyph = "trash", Text = "Delete"
+        ,
+            ProjectId = Model.ProjectId,
+            UserId = Model.UserId,
+            DepartmentId = Model.DepartmentId,
+            BusinessRoleId = Model.BusinessRoleId
+        })
+    </div>
+</td>

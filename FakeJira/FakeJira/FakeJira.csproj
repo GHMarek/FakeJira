@@ -199,10 +199,15 @@
     <Compile Include="Migrations\202206141647568_UpdateUser1.Designer.cs">
       <DependentUpon>202206141647568_UpdateUser1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206201606413_ModelUpdate.cs" />
+    <Compile Include="Migrations\202206201606413_ModelUpdate.Designer.cs">
+      <DependentUpon>202206201606413_ModelUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MiscButtonPartial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -271,6 +276,9 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\CreateBusinessRole.cshtml" />
     <Content Include="Views\User\CreateDepartment.cshtml" />
+    <Content Include="Views\Shared\_MiscButtonPartial.cshtml" />
+    <Content Include="Views\Shared\_TableButtonPartial.cshtml" />
+    <Content Include="Views\Project\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -312,6 +320,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206141647568_UpdateUser1.resx">
       <DependentUpon>202206141647568_UpdateUser1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206201606413_ModelUpdate.resx">
+      <DependentUpon>202206201606413_ModelUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
