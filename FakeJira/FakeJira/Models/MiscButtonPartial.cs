@@ -17,6 +17,7 @@ namespace FakeJira.Models
         public int? UserId { get; set; }
         public int? DepartmentId { get; set; }
         public int? BusinessRoleId { get; set; }
+        public int? TaskId { get; set; }
 
         public string ActionParameter
         {
@@ -42,6 +43,11 @@ namespace FakeJira.Models
                 if (BusinessRoleId != null && BusinessRoleId > 0)
                 {
                     param.Append($"{BusinessRoleId}");
+                }
+
+                if (TaskId != null && TaskId > 0)
+                {
+                    param.Append($"{TaskId}");
                 }
 
                 return param.ToString();

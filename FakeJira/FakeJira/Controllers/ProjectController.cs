@@ -2,6 +2,7 @@
 using FakeJiraDataLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -65,6 +66,64 @@ namespace FakeJira.Controllers
             return View(project);
         }
 
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Project project = db.Project.Find(id);
+
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(project);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Project project)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(project).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Project project = db.Project.Find(id);
+
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(project);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
+        {
+            Project project = db.Project.Find(id);
+            db.Project.Remove(project);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
         protected override void Dispose(bool disposing)
         {

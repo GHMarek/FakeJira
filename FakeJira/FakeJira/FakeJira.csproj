@@ -171,6 +171,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -203,6 +204,14 @@
     <Compile Include="Migrations\202206201606413_ModelUpdate.Designer.cs">
       <DependentUpon>202206201606413_ModelUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206211721264_UpateTaskMode.cs" />
+    <Compile Include="Migrations\202206211721264_UpateTaskMode.Designer.cs">
+      <DependentUpon>202206211721264_UpateTaskMode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206211729503_UpdateTaskEmpAsgnIdNullable.cs" />
+    <Compile Include="Migrations\202206211729503_UpdateTaskEmpAsgnIdNullable.Designer.cs">
+      <DependentUpon>202206211729503_UpdateTaskEmpAsgnIdNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -212,10 +221,11 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\fake-avie-2.png" />
+    <Content Include="Content\Images\fake-avie-3.png" />
+    <Content Include="Content\Images\fake-avie-4.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -279,6 +289,14 @@
     <Content Include="Views\Shared\_MiscButtonPartial.cshtml" />
     <Content Include="Views\Shared\_TableButtonPartial.cshtml" />
     <Content Include="Views\Project\Details.cshtml" />
+    <Content Include="Views\Shared\_EditButtonPartial.cshtml" />
+    <Content Include="Views\Project\Edit.cshtml" />
+    <Content Include="Views\Project\Delete.cshtml" />
+    <Content Include="Views\Task\Create.cshtml" />
+    <Content Include="Views\Task\Delete.cshtml" />
+    <Content Include="Views\Task\Details.cshtml" />
+    <Content Include="Views\Task\Edit.cshtml" />
+    <Content Include="Views\Task\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -288,10 +306,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
@@ -323,6 +337,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206201606413_ModelUpdate.resx">
       <DependentUpon>202206201606413_ModelUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206211721264_UpateTaskMode.resx">
+      <DependentUpon>202206211721264_UpateTaskMode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206211729503_UpdateTaskEmpAsgnIdNullable.resx">
+      <DependentUpon>202206211729503_UpdateTaskEmpAsgnIdNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -17,8 +17,7 @@ namespace FakeJiraDataLibrary.Models
         public int StatusId { get; set; }
         [Required]
         public int ProjectId { get; set; }
-        [Required]
-        public int EmployeeAsgnId { get; set; }
+        public int? EmployeeAsgnId { get; set; }
         [Required]
         public int PriorityId { get; set; }
         [Required]
