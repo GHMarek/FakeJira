@@ -2,7 +2,9 @@
 using FakeJiraDataLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -22,18 +24,52 @@ namespace FakeJira.Controllers
         {
             return View(db.User.ToList());
         }
-        public ActionResult CreateBusinessRole()
+        public ActionResult BusinesRoleIndex()
         {
-            return View();
+            return View(db.BusinessRole.ToList());
         }
-        // POST
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            User user = db.User.Find(id);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(user);
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            User user = db.User.Find(id);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(user);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateBusinessRole(BusinessRole businessRole)
+        public ActionResult Edit(User user)
         {
             if (ModelState.IsValid)
             {
-                db.BusinessRole.Add(businessRole);
+                db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
 
                 return RedirectToAction("Index");
@@ -42,26 +78,32 @@ namespace FakeJira.Controllers
             return View();
         }
 
-        public ActionResult CreateDepartment()
+        public ActionResult Delete(int? id)
         {
-            return View();
-        }
-        // POST
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateDepartment(Department newDepartment)
-        {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                db.Department.Add(newDepartment);
-                db.SaveChanges();
-
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return View();
+            User user = db.User.Find(id);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(user);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
+        {
+            User user = db.User.Find(id);
+            db.User.Remove(user);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
