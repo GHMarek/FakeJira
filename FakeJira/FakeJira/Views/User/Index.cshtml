@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FakeJiraDataLibrary.Models.User>
+﻿@model IEnumerable<FakeJiraDataLibrary.Models.UserModel>
 @using FakeJira.Models
 
 @{
@@ -10,22 +10,19 @@
 <table class="table table-condensed table-hover">
     <tr>
         <th>
-            @Html.DisplayNameFor(m => m.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(m => m.EmailAddress)
-        </th>
-        <th>
             @Html.DisplayNameFor(m => m.FirstName)
         </th>
         <th>
             @Html.DisplayNameFor(m => m.LastName)
         </th>
         <th>
-            @Html.DisplayNameFor(m => m.DepartmentId)
+            @Html.DisplayNameFor(m => m.EmailAddress)
         </th>
         <th>
-            @Html.DisplayNameFor(m => m.BusinessRoleId)
+            @Html.DisplayNameFor(m => m.Department)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.BusinessRole)
         </th>
         <th></th>
         <th></th>
@@ -35,22 +32,19 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(m => i.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(m => i.EmailAddress)
-            </td>
-            <td>
                 @Html.DisplayFor(m => i.FirstName)
             </td>
             <td>
                 @Html.DisplayFor(m => i.LastName)
             </td>
-            <td>
-                @Html.DisplayFor(m => i.DepartmentId)
+                        <td>
+                @Html.DisplayFor(m => i.EmailAddress)
             </td>
             <td>
-                @Html.DisplayFor(m => i.BusinessRoleId)
+                @Html.DisplayFor(m => i.Department.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(m => i.BusinessRole.Name)
             </td>
             <td>
                 @Html.Partial("_TableButtonPartial", new MiscButtonPartial { UserId = i.Id })
