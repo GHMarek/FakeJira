@@ -22,25 +22,22 @@ namespace FakeJira.Controllers
         // GET: User
         public ActionResult Index()
         {
-            List<UserModel> usersList = new List<UserModel>();
-            usersList = (from u in db.User
-                         join d in db.Department on u.DepartmentId equals d.Id into temp
+            //List<UserModel> usersList = new List<UserModel>();
+            //usersList = (from u in db.User
+            //             select new UserModel
+            //             {
+            //                 Id = u.Id,
+            //                 EmailAddress = u.EmailAddress,
+            //                 FirstName = u.FirstName,
+            //                 LastName = u.LastName,
+            //                 Department = u.Department,
+            //                 BusinessRole = u.BusinessRole,
+            //                 Picture = u.Picture
 
-                         from i in temp.DefaultIfEmpty()
-                         select new UserModel
-                         {
-                             Id = u.Id,
-                             EmailAddress = u.EmailAddress,
-                             FirstName = u.FirstName,
-                             LastName = u.LastName,
-                             Department = u.Department,
-                             BusinessRole = u.BusinessRole,
-                             Picture = u.Picture
+            //             }
 
-                         }
-
-                         ).ToList();
-            return View(usersList);
+            //             ).ToList();
+            return View(db.User.Include(t => t.Department).Include(t => t.BusinessRole).ToList());
             //return View(db.User.ToList());
         }
         public ActionResult BusinesRoleIndex()

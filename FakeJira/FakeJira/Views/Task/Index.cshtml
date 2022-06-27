@@ -19,10 +19,10 @@
             @Html.DisplayNameFor(model => model.StatusId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProjectId)
+            @Html.DisplayNameFor(model => model.Project)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EmployeeAsgnId)
+            @Html.DisplayNameFor(model => model.User)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PriorityId)
@@ -37,31 +37,32 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var i in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Title)
+            @Html.DisplayFor(modelItem => i.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.StatusId)
+            @Html.DisplayFor(modelItem => i.StatusId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ProjectId)
+            @Html.DisplayFor(modelItem => i.Project.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EmployeeAsgnId)
+            @Html.DisplayFor(modelItem => i.User.FirstName)
+            @Html.DisplayFor(modelItem => i.User.LastName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PriorityId)
+            @Html.DisplayFor(modelItem => i.PriorityId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DateAdded)
+            @Html.DisplayFor(modelItem => i.DateAdded)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DateClosed)
+            @Html.DisplayFor(modelItem => i.DateClosed)
         </td>
         <td>
-            @Html.Partial("_TableButtonPartial", new MiscButtonPartial { TaskId = item.Id})
+            @Html.Partial("_TableButtonPartial", new MiscButtonPartial { TaskId = i.Id})
         </td>
     </tr>
 }

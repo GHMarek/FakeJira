@@ -222,6 +222,10 @@
     <Compile Include="Migrations\202206231635263_NewForeignKeysAdded2.Designer.cs">
       <DependentUpon>202206231635263_NewForeignKeysAdded2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206271615574_UpdateTask.cs" />
+    <Compile Include="Migrations\202206271615574_UpdateTask.Designer.cs">
+      <DependentUpon>202206271615574_UpdateTask.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -229,6 +233,7 @@
     <Compile Include="Models\MiscButtonPartial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\TaskViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -368,6 +373,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206231635263_NewForeignKeysAdded2.resx">
       <DependentUpon>202206231635263_NewForeignKeysAdded2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206271615574_UpdateTask.resx">
+      <DependentUpon>202206271615574_UpdateTask.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

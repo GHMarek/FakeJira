@@ -7,18 +7,23 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FakeJira.Models;
+using FakeJira.ViewModels;
 using FakeJiraDataLibrary.Models;
 
 namespace FakeJira.Controllers
 {
     public class TaskController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db;
 
+        public TaskController()
+        {
+            db = new ApplicationDbContext();
+        }
         // GET: Task
         public ActionResult Index()
         {
-            return View(db.Task.ToList());
+            return View(db.Task.Include(t => t.Project).Include(t => t.User).ToList());
         }
 
         // GET: Task/Details/5
@@ -33,30 +38,58 @@ namespace FakeJira.Controllers
             {
                 return HttpNotFound();
             }
-            return View(task);
+
+            var model = new TaskViewModel
+            {
+                Task = task,
+                Projects = db.Project.ToList()
+            };
+
+            return View(model);
         }
 
         // GET: Task/Create
         public ActionResult Create()
         {
-            return View();
+            var project = db.Project.ToList();
+            var model = new TaskViewModel
+            {
+                Projects = db.Project.ToList()
+            };
+            return View(model);
         }
 
         // POST: Task/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,StatusId,ProjectId,EmployeeAsgnId,PriorityId,DateAdded,DateClosed")] Task task)
+        public ActionResult Create(TaskViewModel taskVM)
         {
+            var task = new Task
+            {
+                Title = taskVM.Task.Title,
+                StatusId = taskVM.Task.StatusId,
+                ProjectId = taskVM.Task.PriorityId,
+                Project = taskVM.Task.Project,
+                UserId = taskVM.Task.UserId,
+                User = taskVM.Task.User,
+                PriorityId = taskVM.Task.PriorityId,
+                DateAdded = taskVM.Task.DateAdded,
+                DateClosed = taskVM.Task.DateClosed
+            };
+
             if (ModelState.IsValid)
             {
                 db.Task.Add(task);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(task);
+            var model = new TaskViewModel
+            {
+                Task = task,
+                Projects = db.Project.ToList()
+            };
+            taskVM.Projects = db.Project.ToList();
+            return View(model);
         }
 
         // GET: Task/Edit/5
@@ -66,27 +99,49 @@ namespace FakeJira.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Task task = db.Task.Find(id);
             if (task == null)
             {
                 return HttpNotFound();
             }
-            return View(task);
+
+            var model = new TaskViewModel
+            {
+                Task = task,
+                Projects = db.Project.ToList()
+            };
+
+            return View(model);
         }
 
         // POST: Task/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,StatusId,ProjectId,EmployeeAsgnId,PriorityId,DateAdded,DateClosed")] Task task)
+        public ActionResult Edit(TaskViewModel taskVM)
         {
+            var task = new Task
+            {
+                Id = taskVM.Task.Id,
+                Title = taskVM.Task.Title,
+                StatusId = taskVM.Task.StatusId,
+                ProjectId = taskVM.Task.PriorityId,
+                Project = taskVM.Task.Project,
+                UserId = taskVM.Task.UserId,
+                User = taskVM.Task.User,
+                PriorityId = taskVM.Task.PriorityId,
+                DateAdded = taskVM.Task.DateAdded,
+                DateClosed = taskVM.Task.DateClosed
+            };
+
             if (ModelState.IsValid)
             {
                 db.Entry(task).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            taskVM.Projects = db.Project.ToList();
             return View(task);
         }
 
@@ -102,7 +157,13 @@ namespace FakeJira.Controllers
             {
                 return HttpNotFound();
             }
-            return View(task);
+
+            var model = new TaskViewModel
+            {
+                Task = task,
+                Projects = db.Project.ToList()
+            };
+            return View(model);
         }
 
         // POST: Task/Delete/5
