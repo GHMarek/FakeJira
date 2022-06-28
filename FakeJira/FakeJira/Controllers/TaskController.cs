@@ -42,7 +42,8 @@ namespace FakeJira.Controllers
             var model = new TaskViewModel
             {
                 Task = task,
-                Projects = db.Project.ToList()
+                Projects = db.Project.ToList(),
+                Users = db.User.ToList()
             };
 
             return View(model);
@@ -54,7 +55,8 @@ namespace FakeJira.Controllers
             var project = db.Project.ToList();
             var model = new TaskViewModel
             {
-                Projects = db.Project.ToList()
+                Projects = db.Project.ToList(),
+                Users = db.User.ToList()
             };
             return View(model);
         }
@@ -86,7 +88,8 @@ namespace FakeJira.Controllers
             var model = new TaskViewModel
             {
                 Task = task,
-                Projects = db.Project.ToList()
+                Projects = db.Project.ToList(),
+                Users = db.User.ToList()
             };
             taskVM.Projects = db.Project.ToList();
             return View(model);
@@ -109,7 +112,8 @@ namespace FakeJira.Controllers
             var model = new TaskViewModel
             {
                 Task = task,
-                Projects = db.Project.ToList()
+                Projects = db.Project.ToList(),
+                Users = db.User.ToList()
             };
 
             return View(model);
@@ -161,7 +165,8 @@ namespace FakeJira.Controllers
             var model = new TaskViewModel
             {
                 Task = task,
-                Projects = db.Project.ToList()
+                Projects = db.Project.ToList(),
+                Users = db.User.ToList()
             };
             return View(model);
         }

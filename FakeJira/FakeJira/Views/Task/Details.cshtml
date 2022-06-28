@@ -1,4 +1,4 @@
-﻿@model FakeJiraDataLibrary.Models.Task
+﻿@model FakeJira.ViewModels.TaskViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -11,64 +11,65 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.Task.Title)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Title)
+            @Html.DisplayFor(model => model.Task.Title)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.StatusId)
+            @Html.DisplayNameFor(model => model.Task.StatusId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.StatusId)
+            @Html.DisplayFor(model => model.Task.StatusId)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ProjectId)
+            @Html.DisplayNameFor(model => model.Task.ProjectId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ProjectId)
+            @Html.DisplayFor(model => model.Task.Project.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.User)
+            @Html.DisplayNameFor(model => model.Task.User)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.User)
+            @Html.DisplayFor(model => model.Task.User.FirstName)
+            @Html.DisplayFor(model => model.Task.User.LastName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PriorityId)
+            @Html.DisplayNameFor(model => model.Task.PriorityId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PriorityId)
+            @Html.DisplayFor(model => model.Task.PriorityId)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DateAdded)
+            @Html.DisplayNameFor(model => model.Task.DateAdded)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DateAdded)
+            @Html.DisplayFor(model => model.Task.DateAdded)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DateClosed)
+            @Html.DisplayNameFor(model => model.Task.DateClosed)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DateClosed)
+            @Html.DisplayFor(model => model.Task.DateClosed)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Task.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

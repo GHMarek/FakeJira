@@ -9,6 +9,7 @@ namespace FakeJira.ViewModels
     public class TaskViewModel
     {
         public IEnumerable<Project> Projects { get; set; }
+        public IEnumerable<User> Users { get; set; }
         public Task Task { get; set; }
     }
 }
