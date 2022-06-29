@@ -40,5 +40,6 @@ namespace FakeJiraDataLibrary.DataAccess
                 return cnn.Execute(sql);
             }
         }
+
     }
 }

@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using FakeJira.Models;
 using FakeJira.ViewModels;
 using FakeJiraDataLibrary.Models;
+using Microsoft.AspNet.Identity;
+using FakeJiraDataLibrary.Processors;
 
 namespace FakeJira.Controllers
 {
@@ -73,6 +75,7 @@ namespace FakeJira.Controllers
                 ProjectId = taskVM.Task.PriorityId,
                 Project = taskVM.Task.Project,
                 UserId = taskVM.Task.UserId,
+                AuthorId = GetUserId.GetUserIdentity(User.Identity.Name),
                 User = taskVM.Task.User,
                 PriorityId = taskVM.Task.PriorityId,
                 DateAdded = taskVM.Task.DateAdded,

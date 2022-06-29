@@ -20,9 +20,12 @@ namespace FakeJiraDataLibrary.Models
         public int ProjectId { get; set; }
         [ForeignKey("ProjectId")]
         public Project Project { get; set; }
+        public int AuthorId { get; set; }
         public int? UserId { get; set; }
         [ForeignKey("UserId")]
         public User User { get; set; }
+        [ForeignKey("AuthorId")]
+        public User Author { get; set; }
         [Required]
         public int PriorityId { get; set; }
         [Required]

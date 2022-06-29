@@ -71,13 +71,12 @@
     <Compile Include="Models\BusinessRole.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Processors\GetUserId.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Processors\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
