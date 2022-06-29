@@ -12,29 +12,44 @@ namespace FakeJiraDataLibrary.Models
     {
         [Required]
         public int Id { get; set; }
+
         [Required]
         public string Title { get; set; }
+
         [Required]
         public int StatusId { get; set; }
+
         [Required]
         public int ProjectId { get; set; }
+
         [ForeignKey("ProjectId")]
         public Project Project { get; set; }
+
         public int AuthorId { get; set; }
+
         public int? UserId { get; set; }
+
         [ForeignKey("UserId")]
         public User User { get; set; }
+
         [ForeignKey("AuthorId")]
         public User Author { get; set; }
+
         [Required]
         public int PriorityId { get; set; }
+
         [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0: dd-MM-yyyy}")]
         public DateTime DateAdded { get; set; }
+
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0: dd-MM-yyyy}")]
         public DateTime? DateClosed { get; set; }
+
+        [Required]
+        [MinLength(10), MaxLength(8000)]
+        public string Contents { get; set; }
 
 
     }

@@ -72,14 +72,15 @@ namespace FakeJira.Controllers
             {
                 Title = taskVM.Task.Title,
                 StatusId = taskVM.Task.StatusId,
-                ProjectId = taskVM.Task.PriorityId,
+                ProjectId = taskVM.Task.ProjectId,
                 Project = taskVM.Task.Project,
                 UserId = taskVM.Task.UserId,
                 AuthorId = GetUserId.GetUserIdentity(User.Identity.Name),
                 User = taskVM.Task.User,
                 PriorityId = taskVM.Task.PriorityId,
-                DateAdded = taskVM.Task.DateAdded,
-                DateClosed = taskVM.Task.DateClosed
+                DateAdded = DateTime.Now,
+                DateClosed = taskVM.Task.DateClosed,
+                Contents = taskVM.Task.Contents
             };
 
             if (ModelState.IsValid)
@@ -132,13 +133,15 @@ namespace FakeJira.Controllers
                 Id = taskVM.Task.Id,
                 Title = taskVM.Task.Title,
                 StatusId = taskVM.Task.StatusId,
-                ProjectId = taskVM.Task.PriorityId,
+                ProjectId = taskVM.Task.ProjectId,
                 Project = taskVM.Task.Project,
                 UserId = taskVM.Task.UserId,
+                AuthorId = taskVM.Task.AuthorId,
                 User = taskVM.Task.User,
                 PriorityId = taskVM.Task.PriorityId,
                 DateAdded = taskVM.Task.DateAdded,
-                DateClosed = taskVM.Task.DateClosed
+                DateClosed = taskVM.Task.DateClosed,
+                Contents = taskVM.Task.Contents
             };
 
             if (ModelState.IsValid)

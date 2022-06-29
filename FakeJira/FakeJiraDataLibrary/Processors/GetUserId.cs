@@ -10,8 +10,9 @@ namespace FakeJiraDataLibrary.Processors
     {
         public static int GetUserIdentity(string authUser)
         {
-            int userId = DataAccess.SQLDataAccess.LoadData<int>($@"select t.id from dbo.Users t where t.EmailAddress = '{authUser}'").ToList()[0];
-            return userId;
+            //TODO: returns fake id, because authentification wouldn't pass other user at this point.
+            var userId = DataAccess.SQLDataAccess.LoadData<int>($@"select t.id from dbo.Users t where t.EmailAddress = '{authUser}'").ToList();
+            return 1;
         }
 
     }

@@ -236,6 +236,14 @@
     <Compile Include="Migrations\202206271615574_UpdateTask.Designer.cs">
       <DependentUpon>202206271615574_UpdateTask.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206291627136_AddTaskAuto.cs" />
+    <Compile Include="Migrations\202206291627136_AddTaskAuto.Designer.cs">
+      <DependentUpon>202206291627136_AddTaskAuto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206291712333_AddedTaskConten.cs" />
+    <Compile Include="Migrations\202206291712333_AddedTaskConten.Designer.cs">
+      <DependentUpon>202206291712333_AddedTaskConten.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -386,6 +394,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206271615574_UpdateTask.resx">
       <DependentUpon>202206271615574_UpdateTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206291627136_AddTaskAuto.resx">
+      <DependentUpon>202206291627136_AddTaskAuto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206291712333_AddedTaskConten.resx">
+      <DependentUpon>202206291712333_AddedTaskConten.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
