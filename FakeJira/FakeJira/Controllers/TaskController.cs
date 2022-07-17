@@ -21,11 +21,16 @@ namespace FakeJira.Controllers
         public TaskController()
         {
             db = new ApplicationDbContext();
+
         }
         // GET: Task
         public ActionResult Index()
         {
-            return View(db.Task.Include(t => t.Project).Include(t => t.User).ToList());
+            return View(db.Task.Include(t => t.Project)
+                .Include(t => t.User)
+                .Include(t => t.TaskStatus)
+                .Include(t => t.TaskPriority)
+                .ToList());
         }
 
         // GET: Task/Details/5

@@ -19,6 +19,9 @@ namespace FakeJiraDataLibrary.Models
         [Required]
         public int StatusId { get; set; }
 
+        [ForeignKey("StatusId")]
+        public TaskStatus TaskStatus { get; set; }
+
         [Required]
         public int ProjectId { get; set; }
 
@@ -37,6 +40,9 @@ namespace FakeJiraDataLibrary.Models
 
         [Required]
         public int PriorityId { get; set; }
+
+        [ForeignKey("PriorityId")]
+        public TaskPriority TaskPriority { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
