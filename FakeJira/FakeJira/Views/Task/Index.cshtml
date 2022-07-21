@@ -16,7 +16,7 @@
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StatusId)
+            @Html.DisplayNameFor(model => model.TaskStatus)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Project)
@@ -25,7 +25,7 @@
             @Html.DisplayNameFor(model => model.User)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PriorityId)
+            @Html.DisplayNameFor(model => model.TaskPriority)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DateAdded)
@@ -44,7 +44,7 @@
 <tr>
     <td>
        @Html.ActionLink(i.Title,
-        "Edit",   // <-- ActionMethod
+        "WorkOnTask",   // <-- ActionMethod
         "Task" , // <-- Controller Name.
                 new { i.Id }, // <-- Route arguments.
                 null

@@ -23,6 +23,8 @@ namespace FakeJira.Models
     {
         public DbSet<User> User { get; set; }
         public DbSet<FakeJiraDataLibrary.Models.Task> Task { get; set; }
+        public DbSet<FakeJiraDataLibrary.Models.TaskStatus> TaskStatus { get; set; }
+        public DbSet<FakeJiraDataLibrary.Models.TaskPriority> TaskPriority { get; set; }
         public DbSet<Project> Project { get; set; }
         public DbSet<BusinessRole> BusinessRole { get; set; }
         public DbSet<Department> Department { get; set; }

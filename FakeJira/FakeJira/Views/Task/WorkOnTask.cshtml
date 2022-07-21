@@ -1,0 +1,79 @@
+﻿@model FakeJira.ViewModels.TaskViewModel
+@using FakeJira.Models
+
+@{
+    ViewBag.Title = "WorkOnTask";
+}
+
+<h3 style="text-align: center;
+        border: 3px solid lightblue;
+    ">
+    Task #@ViewBag.TaskId: @ViewBag.TaskName;
+</h3>
+
+<style>
+    .flex-container {
+        display: flex;
+        background-color: aliceblue;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .flex-container > div {
+            background-color: whitesmoke;
+            margin: 20px;
+            padding: 20px;
+            font-size: 20px;
+            border: 1px solid
+        }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="flex-container">
+        <div>Task: @Html.DisplayFor(model => model.Task.Title)</div>
+        <div>Priority: @Html.DisplayFor(model => model.Task.TaskPriority.Name)</div>
+        <div>Status: @Html.DisplayFor(model => model.Task.TaskStatus.Name)</div>
+    </div>
+
+    <div class="flex-container">
+        <div>Added: @Html.DisplayFor(model => model.Task.DateAdded)</div>
+        <div>Author: @Html.DisplayFor(model => model.Task.Author.FirstName) @Html.DisplayFor(model => model.Task.Author.LastName)</div>
+        @if ((int)Session["DateClosed"] == 1)
+        {
+            <div>Closed: @Html.DisplayFor(model => model.Task.DateClosed)</div>
+        }
+        else
+        {
+            <div>Closed: pending</div>
+        }
+        <div>Project: @Html.DisplayFor(model => model.Task.Project.Name)</div>
+        <div>Assigned: @Html.DisplayFor(model => model.Task.User.FirstName) @Html.DisplayFor(model => model.Task.User.LastName)</div>
+    </div>
+    <div class="flex-container">
+        <div class="container" style="background-color: floralwhite;
+            border: 1px solid black;
+            padding: 15px;
+            margin: 20px;
+            ">
+            @Html.DisplayFor(model => model.Task.Contents)
+        </div>
+    </div>
+
+}
+
+<div>
+    <div class="col-md-4">
+        @Html.Partial("_BackToListButtonPartial")
+        <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Edit", new {id = Model.Task.Id})">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span>Edit</span>
+        </a>
+    </div>
+    <div class="col-md-8">
+    </div>
+</div>
+
+<hr/>
