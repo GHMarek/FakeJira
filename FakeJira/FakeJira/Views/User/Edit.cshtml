@@ -14,9 +14,6 @@
             @Html.HiddenFor(m => m.Id)
             <div class="row" style="border: 1px solid #bbb9b9; border-radius: 5px;">
                 <div class="col-sm-10">
-
-
-
                     <div class="form-group">
                         @Html.LabelFor(m => m.EmailAddress, htmlAttributes: new { @class = "control-label" })
                         <div class="col-md-10">
@@ -65,13 +62,9 @@
                         <img src="@Model.Picture" , alt="" , style="width:100px; height: 100px"/>
                     </div>
                 </div>
-
             </div>
-
             </div>
-
         </div>
-
     <br />
     <div>
         @Html.Partial("_BackToListButtonPartial")

@@ -15,6 +15,14 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Task.Id)
+        @Html.HiddenFor(model => model.Task.DateAdded)
+        @Html.HiddenFor(model => model.Task.PriorityId)
+        @Html.HiddenFor(model => model.Task.AuthorId)
+        @Html.HiddenFor(model => model.Task.TaskPriority)
+        @Html.HiddenFor(model => model.Task.TaskStatus)
+        @Html.HiddenFor(model => model.Task.User)
+        @Html.HiddenFor(model => model.Task.Project)
+        @Html.HiddenFor(model => model.Task.Author)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Task.Title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -35,7 +43,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Task.ProjectId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Task.ProjectId, new SelectList(Model.Projects, "Id", "Name"), new { @class = "form-control" } )
+                @Html.DropDownListFor(model => model.Task.ProjectId, new SelectList(Model.Projects, "Id", "Name"), new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Task.Project, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -48,21 +56,21 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Task.ProjectId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Task.ProjectId, new SelectList(Model.Projects, "Id", "Name"), new { @class = "form-control" } )
-                @Html.ValidationMessageFor(model => model.Task.Project, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Task.ProjectId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Task.ProjectId, new SelectList(Model.Projects, "Id", "Name"), new { @class = "form-control" } )
+                    @Html.ValidationMessageFor(model => model.Task.Project, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         @*<div class="form-group">
-            @Html.LabelFor(model => model.Task.DateAdded, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Task.DateAdded, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Task.DateAdded, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                @Html.LabelFor(model => model.Task.DateAdded, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Task.DateAdded, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Task.DateAdded, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Task.DateClosed, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -79,15 +87,10 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>*@
+    </div>
+    <div>
+        @Html.Partial("_BackToListButtonPartial")
+        <input type="submit" value="Save" class="btn btn-sm btn-success" />
     </div>
 }
 
-<div>
-    @Html.Partial("_BackToListButtonPartial")
-    <input type="submit" value="Save" class="btn btn-sm btn-success" />
-</div>

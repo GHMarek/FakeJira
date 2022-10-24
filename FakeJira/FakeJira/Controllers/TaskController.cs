@@ -150,7 +150,10 @@ namespace FakeJira.Controllers
                 PriorityId = taskVM.Task.PriorityId,
                 DateAdded = taskVM.Task.DateAdded,
                 DateClosed = taskVM.Task.DateClosed,
-                Contents = taskVM.Task.Contents
+                Contents = taskVM.Task.Contents,
+                TaskPriority = taskVM.Task.TaskPriority,
+                TaskStatus = taskVM.Task.TaskStatus,
+                Author = taskVM.Task.Author
             };
 
             if (ModelState.IsValid)
@@ -234,37 +237,36 @@ namespace FakeJira.Controllers
             return View(model);
         }
 
-        // POST: Task/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult WorkOnTask(TaskViewModel taskVM)
-        {
-            var task = new Task
-            {
-                Id = taskVM.Task.Id,
-                Title = taskVM.Task.Title,
-                StatusId = taskVM.Task.StatusId,
-                ProjectId = taskVM.Task.ProjectId,
-                Project = taskVM.Task.Project,
-                UserId = taskVM.Task.UserId,
-                AuthorId = taskVM.Task.AuthorId,
-                User = taskVM.Task.User,
-                PriorityId = taskVM.Task.PriorityId,
-                DateAdded = taskVM.Task.DateAdded,
-                DateClosed = taskVM.Task.DateClosed,
-                Contents = taskVM.Task.Contents
-            };
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult WorkOnTask(TaskViewModel taskVM)
+        //{
+        //    var task = new Task
+        //    {
+        //        Id = taskVM.Task.Id,
+        //        Title = taskVM.Task.Title,
+        //        StatusId = taskVM.Task.StatusId,
+        //        ProjectId = taskVM.Task.ProjectId,
+        //        Project = taskVM.Task.Project,
+        //        UserId = taskVM.Task.UserId,
+        //        AuthorId = taskVM.Task.AuthorId,
+        //        User = taskVM.Task.User,
+        //        PriorityId = taskVM.Task.PriorityId,
+        //        DateAdded = taskVM.Task.DateAdded,
+        //        DateClosed = taskVM.Task.DateClosed,
+        //        Contents = taskVM.Task.Contents
+        //    };
 
-            if (ModelState.IsValid)
-            {
-                db.Entry(task).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(task).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            taskVM.Projects = db.Project.ToList();
-            return View(task);
-        }
+        //    taskVM.Projects = db.Project.ToList();
+        //    return View(task);
+        //}
         protected override void Dispose(bool disposing)
         {
             if (disposing)

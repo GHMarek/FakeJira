@@ -6,34 +6,36 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    <link rel="stylesheet" type="text/css" href="~/Content/Site.css">
+    @*https://stackoverflow.com/questions/200476/html-actionlink-method*@
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top" id="main_navbar_cont">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("FakeJira", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
+            @*<div class="navbar-header">
+                <button type="button" class="navbar-brand" id="brandNameBtn">
+                    @Html.ActionLink("FakeJira", "Index", "Home")
+                </button>   
+            </div>*@
+            <div class="navbar-collapse collapse" id="main_navbar">
                 <ul class="nav navbar-nav">
+                    <li id="brand_name_li">
+                        @Html.ActionLink("FakeJira", "Index", "Home")
+                    </li>
                     @if (User.IsInRole("Admin"))
                     {
                         @Html.Partial("_AdminMenuPartial")
                     }
 
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    @*<li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                    <li id="nav_menu_li">@Html.ActionLink("FakeProjects", "Index", "Project")</li>
+                    <li id="nav_menu_li">@Html.ActionLink("MyFakeTasks", "Index", "Task")</li>
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
+    <br />
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -41,6 +43,7 @@
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/FakeJiraJs")

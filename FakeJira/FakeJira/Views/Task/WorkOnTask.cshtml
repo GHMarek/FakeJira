@@ -32,11 +32,53 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="flex-container">
-        <div>Task: @Html.DisplayFor(model => model.Task.Title)</div>
-        <div>Priority: @Html.DisplayFor(model => model.Task.TaskPriority.Name)</div>
-        <div>Status: @Html.DisplayFor(model => model.Task.TaskStatus.Name)</div>
-    </div>
+    <table class="table">
+        <tr>
+            <th>Assigned</th>
+            <th>Priority</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <th>@Html.DisplayFor(model => model.Task.User.FirstName) @Html.DisplayFor(model => model.Task.User.LastName)</th>
+            <th>@Html.DisplayFor(model => model.Task.TaskPriority.Name)</th>
+            <th>@Html.DisplayFor(model => model.Task.TaskStatus.Name)</th>
+        </tr>
+    </table>
+
+    <table class="table">
+        <tr>
+            <th>Added</th>
+            <th>Author</th>
+            <th>Closed</th>
+        </tr>
+        <tr>
+            <th>@Html.DisplayFor(model => model.Task.DateAdded)</th>
+            <th>@Html.DisplayFor(model => model.Task.Author.FirstName) @Html.DisplayFor(model => model.Task.Author.LastName)</th>
+            <th>
+                @if ((int)Session["DateClosed"] == 1)
+                {
+                    <div>@Html.DisplayFor(model => model.Task.DateClosed)</div>
+                }
+                else
+                {
+                    <div>pending</div>
+                }
+            </th>
+        </tr>
+    </table>
+
+    <table class="table">
+        <tr>
+            <th>Project</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <th>@Html.DisplayFor(model => model.Task.Project.Name)</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </table>
 
     <div class="flex-container">
         <div>Added: @Html.DisplayFor(model => model.Task.DateAdded)</div>
@@ -76,4 +118,4 @@
     </div>
 </div>
 
-<hr/>
+<hr />

@@ -52,7 +52,7 @@
         @*@Html.DisplayFor(modelItem => i.Title)*@
     </td>
     <td>
-        @Html.DisplayFor(modelItem => i.StatusId)
+        @Html.DisplayFor(modelItem => i.TaskStatus.Name)
     </td>
     <td>
         @Html.DisplayFor(modelItem => i.Project.Name)
@@ -62,7 +62,7 @@
         @Html.DisplayFor(modelItem => i.User.LastName)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => i.PriorityId)
+        @Html.DisplayFor(modelItem => i.TaskPriority.Name)
     </td>
     <td>
         @Html.DisplayFor(modelItem => i.DateAdded)

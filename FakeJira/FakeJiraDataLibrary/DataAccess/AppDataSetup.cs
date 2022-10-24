@@ -41,7 +41,7 @@ namespace FakeJiraDataLibrary.DataAccess
 
                 SQLDataAccess.SaveData(sql, newStatusList);
 
-                
+
             }
         }
         public static void AddBasicTaskPriorities()
@@ -68,7 +68,6 @@ namespace FakeJiraDataLibrary.DataAccess
                 SQLDataAccess.SaveData(sql, newStatusList);
             }
         }
-
         public static void AddBasicProjects()
         {
             var ProjectPriorityCount = SQLDataAccess.LoadData<int>("select count(*) from dbo.Projects").ToList().FirstOrDefault();
