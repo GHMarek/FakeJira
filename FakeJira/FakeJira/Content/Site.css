@@ -28,22 +28,26 @@ textarea {
     background-color: #00A379;
 }
 
-/*#dropdown_admin_menu {
-    background-color: #0c7359;
-}*/
-
-
-/*#brand_name_li {
-    font-size: larger;
-    background-color: #00A379;
+#timestamp_id {
+    padding-top: 19.5px;
+    padding-bottom: 19.5px;
+    margin-top: auto;
+    font-weight: bold;
 }
 
-#main_navbar {
-    background-color: #2F4F4F;
+.flex-container {
+    display: flex;
+    background-color: aliceblue;
+    align-items: center;
+    justify-content: center;
 }
 
-#main_navbar_cont {
-    background-color: #2F4F4F;
+.flex-container > div {
+    background-color: whitesmoke;
+    margin: 20px;
+    padding: 20px;
+    font-size: 20px;
+    border: 1px solid
 }
 
 
@@ -53,4 +57,3 @@ textarea {
 }
 #home_header_id {
 }
-*/

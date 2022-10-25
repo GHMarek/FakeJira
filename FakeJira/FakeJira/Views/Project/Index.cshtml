@@ -5,26 +5,50 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Project</h2>
+<div class="row">
+    <div class="col-md-2">
+        <h2>Projects</h2>
+    </div>
+    <div class="col-md-5">
+        @if (User.IsInRole("Admin"))
+        {
+            <h2>@Html.Partial("_CreateButtonPartial")</h2>
+        }
+    </div>
+    <div class="col-md-5">
+        
+    </div>
+</div>
 
-@Html.Partial("_CreateButtonPartial")
+
+<br />
 
 <table class="table table-condensed table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(m => m.Name)
         </th>
-        <th>Button</th>
+
     </tr>
 
     @foreach(var i in Model)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(m => i.Name)
+                        @*@Html.DisplayFor(m => i.Name)*@
+                        @Html.ActionLink(i.Name,
+                        "IndexFilter",   // <-- ActionMethod
+                         "Task", // <-- Controller Name.
+                        new { i.Name }, // <-- Route arguments.
+                        null
+                        )
                     </td>
                     <td>
-                        @Html.Partial("_TableButtonPartial", new MiscButtonPartial { ProjectId = i.Id })
+                        @if (User.IsInRole("Admin"))
+                        {
+                            @Html.Partial("_TableButtonPartial", new MiscButtonPartial { ProjectId = i.Id })
+                        }
+
                     </td>
                 </tr>
             }

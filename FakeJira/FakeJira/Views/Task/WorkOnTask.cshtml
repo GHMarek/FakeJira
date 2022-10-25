@@ -5,117 +5,96 @@
     ViewBag.Title = "WorkOnTask";
 }
 
-<h3 style="text-align: center;
-        border: 3px solid lightblue;
-    ">
-    Task #@ViewBag.TaskId: @ViewBag.TaskName;
-</h3>
-
-<style>
-    .flex-container {
-        display: flex;
-        background-color: aliceblue;
-        align-items: center;
-        justify-content: center;
-    }
-
-        .flex-container > div {
-            background-color: whitesmoke;
-            margin: 20px;
-            padding: 20px;
-            font-size: 20px;
-            border: 1px solid
-        }
-</style>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <table class="table">
-        <tr>
-            <th>Assigned</th>
-            <th>Priority</th>
-            <th>Status</th>
-        </tr>
-        <tr>
-            <th>@Html.DisplayFor(model => model.Task.User.FirstName) @Html.DisplayFor(model => model.Task.User.LastName)</th>
-            <th>@Html.DisplayFor(model => model.Task.TaskPriority.Name)</th>
-            <th>@Html.DisplayFor(model => model.Task.TaskStatus.Name)</th>
-        </tr>
-    </table>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row" id="taskViewRow">
+                    <div class="col-md-4 col-sm-4">
+                        <h3>
+                            Project: @Html.DisplayFor(model => model.Task.Project.Name)
+                        </h3>
+                    </div>
+                    <div class="col-md-8 col-sm-8">
+                        <h3>
+                            Task #@ViewBag.TaskId: @ViewBag.TaskName;
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="panel-heading">
+                tresc
 
-    <table class="table">
-        <tr>
-            <th>Added</th>
-            <th>Author</th>
-            <th>Closed</th>
-        </tr>
-        <tr>
-            <th>@Html.DisplayFor(model => model.Task.DateAdded)</th>
-            <th>@Html.DisplayFor(model => model.Task.Author.FirstName) @Html.DisplayFor(model => model.Task.Author.LastName)</th>
-            <th>
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+       <div class="row" id="taskViewRow">
+            <div class="col-md-4 col-sm-4">
+                Assigned: @Html.DisplayFor(model => model.Task.User.FirstName) @Html.DisplayFor(model => model.Task.User.LastName)
+            </div>
+            <div class="col-md-4 col-sm-4">
+                Priority: @Html.DisplayFor(model => model.Task.TaskPriority.Name)
+            </div>
+            <div class="col-md-4 col-sm-4">
+                Status: @Html.DisplayFor(model => model.Task.TaskStatus.Name)
+            </div>
+        </div>
+       <div class="row" id="taskViewRow">
+            <div class="col-md-4 col-sm-4">
+                Added: @Html.DisplayFor(model => model.Task.DateAdded)
+            </div>
+            <div class="col-md-4 col-sm-4">
+                Author: @Html.DisplayFor(model => model.Task.Author.FirstName) @Html.DisplayFor(model => model.Task.Author.LastName)
+            </div>
+
+
+        </div>
+
+       <div class="row" id="taskViewRow">
+            <div class="col-md-4 col-sm-4">
+
                 @if ((int)Session["DateClosed"] == 1)
                 {
-                    <div>@Html.DisplayFor(model => model.Task.DateClosed)</div>
+                    <div> Closed: @Html.DisplayFor(model => model.Task.DateClosed)</div>
                 }
                 else
                 {
-                    <div>pending</div>
+                    <div>Closed: pending</div>
                 }
-            </th>
-        </tr>
-    </table>
+            </div>
+        </div>
 
-    <table class="table">
-        <tr>
-            <th>Project</th>
-            <th></th>
-            <th></th>
-        </tr>
-        <tr>
-            <th>@Html.DisplayFor(model => model.Task.Project.Name)</th>
-            <th></th>
-            <th></th>
-        </tr>
-    </table>
+        <div class="row" id="taskViewRow">
+            <div class="col-md-12 col-sm-12">
+                @Html.DisplayFor(model => model.Task.Contents)
+            </div>
+            
+        </div>
 
-    <div class="flex-container">
-        <div>Added: @Html.DisplayFor(model => model.Task.DateAdded)</div>
-        <div>Author: @Html.DisplayFor(model => model.Task.Author.FirstName) @Html.DisplayFor(model => model.Task.Author.LastName)</div>
-        @if ((int)Session["DateClosed"] == 1)
-        {
-            <div>Closed: @Html.DisplayFor(model => model.Task.DateClosed)</div>
-        }
-        else
-        {
-            <div>Closed: pending</div>
-        }
-        <div>Project: @Html.DisplayFor(model => model.Task.Project.Name)</div>
-        <div>Assigned: @Html.DisplayFor(model => model.Task.User.FirstName) @Html.DisplayFor(model => model.Task.User.LastName)</div>
-    </div>
-    <div class="flex-container">
-        <div class="container" style="background-color: floralwhite;
-            border: 1px solid black;
-            padding: 15px;
-            margin: 20px;
-            ">
-            @Html.DisplayFor(model => model.Task.Contents)
+        <div class="row" id="taskViewRow">
+                <div class="col-md-4 col-sm-2">
+                    @Html.Partial("_BackToListButtonPartial")
+                    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Edit", new {id = Model.Task.Id})">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        <span>Edit</span>
+                    </a>
+                </div>
+                <div class="col-md-8 col-sm-10">
+
+            </div>
+
         </div>
     </div>
 
 }
-
-<div>
-    <div class="col-md-4">
-        @Html.Partial("_BackToListButtonPartial")
-        <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Edit", new {id = Model.Task.Id})">
-            <span class="glyphicon glyphicon-pencil"></span>
-            <span>Edit</span>
-        </a>
-    </div>
-    <div class="col-md-8">
-    </div>
-</div>
-
-<hr />

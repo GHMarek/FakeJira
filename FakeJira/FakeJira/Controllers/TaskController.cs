@@ -32,6 +32,18 @@ namespace FakeJira.Controllers
                 .Include(t => t.TaskPriority)
                 .ToList());
         }
+    
+        public ActionResult IndexFilter(string project)
+        {
+           
+            return View("Index", db.Task.Where(x => x.Project.Name == project).Include(t => t.Project)
+            .Include(t => t.User)
+            .Include(t => t.TaskStatus)
+            .Include(t => t.TaskPriority)
+            .ToList());
+
+
+        }
 
         // GET: Task/Details/5
         public ActionResult Details(int? id)
@@ -102,7 +114,9 @@ namespace FakeJira.Controllers
                 Projects = db.Project.ToList(),
                 Users = db.User.ToList()
             };
+
             taskVM.Projects = db.Project.ToList();
+
             return View(model);
         }
 

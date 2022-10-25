@@ -18,20 +18,32 @@
                 </button>   
             </div>*@
             <div class="navbar-collapse collapse" id="main_navbar">
-                <ul class="nav navbar-nav">
-                    <li id="brand_name_li">
-                        @Html.ActionLink("FakeJira", "Index", "Home")
-                    </li>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        @Html.Partial("_AdminMenuPartial")
-                    }
+                <row>
+                    <div class="col-sm-8">
+                        <ul class="nav navbar-nav">
+                            <li id="brand_name_li">
+                                @Html.ActionLink("FakeJira", "Index", "Home")
+                            </li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                @Html.Partial("_AdminMenuPartial")
+                            }
+                            @if (User.IsInRole("User"))
+                            {
+                                <li id="nav_menu_li">@Html.ActionLink("FakeProjects", "Index", "Project")</li>
+                                <li id="nav_menu_li">@Html.ActionLink("MyFakeTasks", "Index", "Task")</li>
+                            }
 
-                    <li id="nav_menu_li">@Html.ActionLink("FakeProjects", "Index", "Project")</li>
-                    <li id="nav_menu_li">@Html.ActionLink("MyFakeTasks", "Index", "Task")</li>
+                        </ul>
 
-                </ul>
-                @Html.Partial("_LoginPartial")
+
+                    </div>
+                    <ul class="nav navbar-nav">
+                        @Html.Partial("_LoginPartial")
+                    </ul>
+                    
+
+                </row>
             </div>
         </div>
     </div>
@@ -40,7 +52,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Marek demo app</p>
         </footer>
     </div>
 
