@@ -3,85 +3,111 @@
 @{
     ViewBag.Title = "Index";
 }
+<br />
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <h3>Manage Tasks</h3>
 
-    <p>
-        @Html.Partial("_CreateButtonPartial")
-    </p>
-    <br />
-    <table class="table table-condensed table-hover">
-        <tr class="table-header">
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TaskStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Project)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TaskPriority)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateAdded)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateClosed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Author)
-            </th>
-            <th></th>
-            <th></th>
-        </tr>
+    <div class="panel panel-primary" id="projects_header_id">
+        <div class="row">
+            <div class="col-md-2" style="margin-left: 15px;">
+                <h3>Manage Tasks</h3>
+            </div>
 
-        @foreach (var i in Model)
-        {
-            <tr>
-                <td>
-                    @Html.ActionLink(i.Title,
-                     "Index",   // <-- ActionMethod
-                     "Task", // <-- Controller Name.
-                             new { i.Id }, // <-- Route arguments.
-                             null
-                             )
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => i.TaskStatus.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => i.Project.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => i.User.FirstName)
-                    @Html.DisplayFor(modelItem => i.User.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => i.TaskPriority.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => i.DateAdded)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => i.DateClosed)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => i.Author.FirstName)
-                    @Html.DisplayFor(modelItem => i.Author.LastName)
-                </td>
-                <td>
-                    @Html.Partial("_TableButtonPartial", new MiscButtonPartial { TaskId = i.Id })
-                </td>
-            </tr>
-        }
+            <div class="col-md-5">
+                @if (User.IsInRole("Admin"))
+                {
+                    <h3>@Html.Partial("_CreateButtonPartial")</h3>
+                }
+            </div>
 
-    </table>  
-    
-   }
+            <div class="col-md-5">
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel panel-heading panel-info"
+            <p></p>
+        </div>
+        <div class="panel-body">
+            <table class="table table-condensed table-hover table-responsive">
+                <tr class="table-header table-striped">
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TaskStatus)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Project)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.User)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TaskPriority)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateAdded)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateClosed)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Author)
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                @foreach (var i in Model)
+                {
+
+                    <tr>
+                        <td>
+                            @Html.ActionLink(i.Title,
+                             "WorkOnTask",   // <-- ActionMethod
+                             "Task", // <-- Controller Name.
+                                     new { i.Id }, // <-- Route arguments.
+                                     null
+                                     )
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => i.TaskStatus.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => i.Project.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => i.User.FirstName)
+                            @Html.DisplayFor(modelItem => i.User.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => i.TaskPriority.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => i.DateAdded)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => i.DateClosed)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => i.Author.FirstName)
+                            @Html.DisplayFor(modelItem => i.Author.LastName)
+                        </td>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            @Html.Partial("_TableButtonPartial", new MiscButtonPartial { ProjectId = i.Id })
+                        }
+
+                    </tr>
+                }
+            </table>
+        </div>
+
+
+    }
+</div>

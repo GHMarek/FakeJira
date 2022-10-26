@@ -50,7 +50,10 @@ textarea {
     border: 1px solid
 }
 
-
+/*#projects_header_id {
+    background-color: #08ac81;
+    border-color: #08ac81;
+}*/
 
 #nav_menu_li:hover {
     background-color: #00A379;

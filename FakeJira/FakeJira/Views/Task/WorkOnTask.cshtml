@@ -8,93 +8,78 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
+    <br />
     <div class="container">
-        <div class="panel panel-default">
-            <div class="panel-heading">
+        <div class="panel panel-primary" id="projects_header_id">
+            <div class="row" id="taskViewRow">
+                <div class="col-md-4 col-sm-4" style="margin-left: 15px;">
+
+                    <p>
+                        Project: @Html.DisplayFor(model => model.Task.Project.Name)
+                    </p>
+                    <p>
+                        Task #@ViewBag.TaskId: @ViewBag.TaskName;
+                    </p>
+                </div>
+                <div class="col-md-8">
+                    
+
+                    
+                    <span class="label label-info">Assigned: @Html.DisplayFor(model => model.Task.User.FirstName) @Html.DisplayFor(model => model.Task.User.LastName)</span>
+
+                    <span class="label label-primary">Priority: @Html.DisplayFor(model => model.Task.TaskPriority.Name)</span>
+
+                    <span class="label label-default">Status: @Html.DisplayFor(model => model.Task.TaskStatus.Name)</span>
+                    <span class="label label-default">Added: @Html.DisplayFor(model => model.Task.DateAdded)</span>
+                    <span class="label label-default">Author: @Html.DisplayFor(model => model.Task.Author.FirstName) @Html.DisplayFor(model => model.Task.Author.LastName)</span>
+                    @if ((int)Session["DateClosed"] == 1)
+                    {
+                        <span class="label label-success"> Closed: @Html.DisplayFor(model => model.Task.DateClosed)</span>
+                    }
+                    else
+                    {
+                        <span class="label label-warning">Closed: pending</span>
+                    }
+                
+            </div>
+            </div>
+
+        </div>
+        <div class="panel panel-primary">
+
+            <div class="panel panel-heading panel-info">
+                Task content: 
+            </div>
+
+            <div class="panel-body">
                 <div class="row" id="taskViewRow">
-                    <div class="col-md-4 col-sm-4">
-                        <h3>
-                            Project: @Html.DisplayFor(model => model.Task.Project.Name)
-                        </h3>
+                    <div class="col-md-12 col-sm-12">
+                        @Html.DisplayFor(model => model.Task.Contents)
                     </div>
-                    <div class="col-md-8 col-sm-8">
-                        <h3>
-                            Task #@ViewBag.TaskId: @ViewBag.TaskName;
-                        </h3>
-                    </div>
+
                 </div>
-            </div>
-            <br />
-            <div class="panel-heading">
-                tresc
 
             </div>
-
-
 
 
         </div>
 
 
-
-
-       <div class="row" id="taskViewRow">
-            <div class="col-md-4 col-sm-4">
-                Assigned: @Html.DisplayFor(model => model.Task.User.FirstName) @Html.DisplayFor(model => model.Task.User.LastName)
-            </div>
-            <div class="col-md-4 col-sm-4">
-                Priority: @Html.DisplayFor(model => model.Task.TaskPriority.Name)
-            </div>
-            <div class="col-md-4 col-sm-4">
-                Status: @Html.DisplayFor(model => model.Task.TaskStatus.Name)
-            </div>
-        </div>
-       <div class="row" id="taskViewRow">
-            <div class="col-md-4 col-sm-4">
-                Added: @Html.DisplayFor(model => model.Task.DateAdded)
-            </div>
-            <div class="col-md-4 col-sm-4">
-                Author: @Html.DisplayFor(model => model.Task.Author.FirstName) @Html.DisplayFor(model => model.Task.Author.LastName)
-            </div>
-
-
-        </div>
-
-       <div class="row" id="taskViewRow">
-            <div class="col-md-4 col-sm-4">
-
-                @if ((int)Session["DateClosed"] == 1)
-                {
-                    <div> Closed: @Html.DisplayFor(model => model.Task.DateClosed)</div>
-                }
-                else
-                {
-                    <div>Closed: pending</div>
-                }
-            </div>
-        </div>
 
         <div class="row" id="taskViewRow">
-            <div class="col-md-12 col-sm-12">
-                @Html.DisplayFor(model => model.Task.Contents)
+            <div class="col-md-4 col-sm-2">
+                @Html.Partial("_BackToListButtonPartial")
+                <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Edit", new {id = Model.Task.Id})">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    <span>Edit</span>
+                </a>
             </div>
-            
-        </div>
-
-        <div class="row" id="taskViewRow">
-                <div class="col-md-4 col-sm-2">
-                    @Html.Partial("_BackToListButtonPartial")
-                    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Edit", new {id = Model.Task.Id})">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                        <span>Edit</span>
-                    </a>
-                </div>
-                <div class="col-md-8 col-sm-10">
+            <div class="col-md-8 col-sm-10">
 
             </div>
 
         </div>
     </div>
+
 
 }

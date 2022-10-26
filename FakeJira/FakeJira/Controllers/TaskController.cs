@@ -26,22 +26,29 @@ namespace FakeJira.Controllers
         // GET: Task
         public ActionResult Index()
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return View("Index", db.Task.Where(x => x.User.EmailAddress == User.Identity.Name).Include(t => t.Project)
+                        .Include(t => t.User)
+                        .Include(t => t.TaskStatus)
+                        .Include(t => t.TaskPriority)
+                        .ToList());
+            }
+
             return View(db.Task.Include(t => t.Project)
-                .Include(t => t.User)
-                .Include(t => t.TaskStatus)
-                .Include(t => t.TaskPriority)
-                .ToList());
+                    .Include(t => t.User)
+                    .Include(t => t.TaskStatus)
+                    .Include(t => t.TaskPriority)
+                    .ToList());
         }
-    
-        public ActionResult IndexFilter(string project)
+        public ActionResult IndexFilterProject(string id)
         {
            
-            return View("Index", db.Task.Where(x => x.Project.Name == project).Include(t => t.Project)
+            return View("Index", db.Task.Where(x => x.Project.Name == id).Include(t => t.Project)
             .Include(t => t.User)
             .Include(t => t.TaskStatus)
             .Include(t => t.TaskPriority)
             .ToList());
-
 
         }
 
@@ -87,6 +94,43 @@ namespace FakeJira.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(TaskViewModel taskVM)
         {
+
+            taskVM.Task.Project = new Project
+            {
+                Id = taskVM.Task.ProjectId,
+                Name = db.Project.Where(x => x.Id == taskVM.Task.ProjectId).ToString()
+            };
+
+            //taskVM.Task.Author = new User
+            //{
+            //    Id = taskVM.Task.AuthorId,
+            //    FirstName = db.User.Where(x => x.Id == taskVM.Task.AuthorId).Select(x => x).FirstOrDefault().FirstName,
+            //    LastName = db.User.Where(x => x.Id == taskVM.Task.AuthorId).Select(x => x).FirstOrDefault().LastName,
+            //    EmailAddress = db.User.Where(x => x.Id == taskVM.Task.AuthorId).Select(x => x).FirstOrDefault().EmailAddress,
+            //    DepartmentId = db.User.Where(x => x.Id == taskVM.Task.AuthorId).Select(x => x).FirstOrDefault().DepartmentId,
+            //    Department = new Department
+            //    {
+            //        Id = db.Department.Where(x => x.Id == db.User.Where(y => y.Id == taskVM.Task.AuthorId).Select(y => y).FirstOrDefault().DepartmentId).FirstOrDefault().Id,
+            //        Name = db.Department.Where(x => x.Id == db.User.Where(y => y.Id == taskVM.Task.AuthorId).Select(y => y).FirstOrDefault().DepartmentId).Select(x => x).FirstOrDefault().Name
+            //    },
+            //    BusinessRoleId = db.User.Where(x => x.Id == taskVM.Task.AuthorId).Select(x => x).ToList()[0].BusinessRoleId,
+            //    BusinessRole = new BusinessRole
+            //    {
+            //        Id = Convert.ToInt32(db.User.Where(x => x.Id == taskVM.Task.AuthorId).Select(x => x).ToList()[0].BusinessRoleId),
+            //        Name = db.BusinessRole.Where(y => y.Id == Convert.ToInt32(db.User.Where(x => x.Id == taskVM.Task.AuthorId).Select(x => x).FirstOrDefault().BusinessRoleId)).FirstOrDefault().Name,
+            //        Manager = db.BusinessRole.Where(y => y.Id == Convert.ToInt32(db.User.Where(x => x.Id == taskVM.Task.AuthorId).Select(x => x).FirstOrDefault().BusinessRoleId)).FirstOrDefault().Manager,
+            //        ParentManagerId = db.BusinessRole.Where(y => y.Id == Convert.ToInt32(db.User.Where(x => x.Id == taskVM.Task.AuthorId).Select(x => x).FirstOrDefault().BusinessRoleId)).FirstOrDefault().ParentManagerId
+            //    },
+            //    Picture = db.User.Where(x => x.Id == taskVM.Task.AuthorId).Select(x => x).ToList()[0].Picture
+
+            //};
+
+
+
+            //taskVM.Task.Author = db.Users.Where(x => x.Id == taskVM.Task.AuthorId.ToString()).Select(x => x).ToList()[0];
+
+
+            //var task = taskVM.Task;
             var task = new Task
             {
                 Title = taskVM.Task.Title,
@@ -129,6 +173,7 @@ namespace FakeJira.Controllers
             }
 
             Task task = db.Task.Find(id);
+
             if (task == null)
             {
                 return HttpNotFound();
@@ -151,7 +196,9 @@ namespace FakeJira.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(TaskViewModel taskVM)
         {
-            var task = new Task
+            //TODO: tutaj po prostu z formularza nie przychodzi pełny taskVM, niektóre pola są nullem
+
+            Task task = new Task
             {
                 Id = taskVM.Task.Id,
                 Title = taskVM.Task.Title,
@@ -178,7 +225,7 @@ namespace FakeJira.Controllers
             }
 
             taskVM.Projects = db.Project.ToList();
-            return View(task);
+            return View();
         }
 
         // GET: Task/Delete/5
